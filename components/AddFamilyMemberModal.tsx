@@ -8,7 +8,9 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/modal";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/button";
+import { Input } from "@chakra-ui/input";
+import { FormControl, FormLabel } from "@chakra-ui/form-control";
 
 interface AddFamilyMemberModalProps {
   isOpen: boolean;
@@ -32,11 +34,21 @@ export const AddFamilyMemberModal: React.FC<AddFamilyMemberModalProps> = ({
         <ModalBody>
           <FormControl>
             <FormLabel>FamilyMember</FormLabel>
-            <Input />
+            <Input
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+            />
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="blue" onClick={() => null}>
+          <Button
+            colorScheme="blue"
+            disabled={!name}
+            onClick={() => {
+              onSubmit(name);
+              onClose();
+            }}
+          >
             Add
           </Button>
         </ModalFooter>
